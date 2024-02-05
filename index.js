@@ -1,80 +1,85 @@
-// var player1 = prompt("Playe 1's Name:");
-// var player2 = prompt("Playe 2's Name:");
+
+var drumClassSelect = document.querySelectorAll(".drum")
 
 
-var randomNumber1 = Math.floor(Math.random() * 6) + 1;
-var randomDiceImgSrc1 = "./images" + "/dice" + randomNumber1 + ".png"
-var image1 = document.querySelectorAll("div img")[0];
-image1.setAttribute("src", randomDiceImgSrc1)
+for ( i = 0; i < drumClassSelect.length; i++) {
 
-var randomNumber2 = Math.floor(Math.random() * 6) + 1;
-var randomDiceImgSrc2 = "./images" + "/dice" + randomNumber2 + ".png"
-var image2 = document.querySelectorAll("div img")[1];
-image2.setAttribute("src", randomDiceImgSrc2)
+    drumClassSelect[i].addEventListener("click", function () {
+
+        var buttonLetter = this.innerHTML; 
+        makeSound(buttonLetter);
+        buttonAnimation(buttonLetter);
 
 
-// if (randomNumber1 === 1) {
-//     document.querySelector(".img1").setAttribute("src", "./images/dice1.png");
-// }
-// else if (randomNumber1 === 2) {
-//     document.querySelector(".img1").setAttribute("src", "./images/dice2.png");
-
-// }
-
-// else if (randomNumber1 === 3) {
-//     document.querySelector(".img1").setAttribute("src", "./images/dice3.png");
-// }
-
-// else if (randomNumber1 === 4) {
-//     document.querySelector(".img1").setAttribute("src", "./images/dice4.png");
-// }
-
-// else if (randomNumber1 === 5) {
-//     document.querySelector(".img1").setAttribute("src", "./images/dice5.png");
-// }
-
-// else {
-//     document.querySelector(".img1").setAttribute("src", "./images/dice6.png");
-// }
-
-
-//
-
-
-
-// if (randomNumber2 === 1) {
-//     document.querySelector(".img2").setAttribute("src", "./images/dice1.png");
-// }
-// else if (randomNumber2 === 2) {
-//     document.querySelector(".img2").setAttribute("src", "./images/dice2.png");
-
-// }
-
-// else if (randomNumber2 === 3) {
-//     document.querySelector(".img2").setAttribute("src", "./images/dice3.png");
-// }
-
-// else if (randomNumber2 === 4) {
-//     document.querySelector(".img2").setAttribute("src", "./images/dice4.png");
-// }
-
-// else if (randomNumber2 === 5) {
-//     document.querySelector(".img2").setAttribute("src", "./images/dice5.png");
-// }
-
-// else {
-//     document.querySelector(".img2").setAttribute("src", "./images/dice6.png");
-// }
-
-
-if (randomNumber1 > randomNumber2) {
-    document.querySelector("h1").innerHTML = "🚩Player 1 Wins!"
-}
-else if (randomNumber1 < randomNumber2) {
-    document.querySelector("h1").innerHTML = "Player 2 Wins! 🚩"
-}
-else {
-    document.querySelector("h1").innerHTML = "Draw!"
+    }); //type, listener
 
 }
 
+document.addEventListener("keydown", function(event) {
+    makeSound(event.key);
+    buttonAnimation(event.key);
+
+    // console.log(event)
+    // alert("key pressed!");
+})
+
+
+function makeSound(key) {
+    switch (key) {
+        case "w":
+            var crash = new Audio("./sounds/crash.mp3");
+            crash.play();
+        break;
+
+        case "a":
+            var kickBass = new Audio("./sounds/kick-bass.mp3");
+            kickBass.play();
+        break;
+
+        case "s":
+            var snare = new Audio("./sounds/snare.mp3");
+            snare.play();
+        break;
+
+        case "d":
+            var tom1 = new Audio("./sounds/tom-1.mp3");
+            tom1.play();
+        break;
+
+        case "j":
+            var tom2 = new Audio("./sounds/tom-2.mp3");
+            tom2.play();
+        break;
+
+
+        case "k":
+            var tom3 = new Audio("./sounds/tom-3.mp3");
+            tom3.play();
+        break;
+
+        case "l":
+            var tom4 = new Audio("./sounds/tom-4.mp3");
+            tom4.play();
+        break;
+
+        default: console,log(buttonLetter);
+
+    }
+
+
+}
+
+
+function buttonAnimation(key) {
+    var activeBtn = document.querySelector("." + key);
+    activeBtn.classList.add('pressed');
+
+    setTimeout( function() {
+        activeBtn.classList.remove('pressed');
+    }, 200);
+
+}
+
+
+
+ 
